@@ -1,0 +1,119 @@
+2024-05-21 12:21:38,121 INFO [main] r.y.b.BanksampleApplication [StartupInfoLogger.java:50] Starting BanksampleApplication using Java 18.0.2.1 with PID 6280 (F:\JavaSpring_myPrj\banksample\target\classes started by 1 in F:\JavaSpring_myPrj\banksample)
+2024-05-21 12:21:38,124 INFO [main] r.y.b.BanksampleApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
+2024-05-21 12:21:49,989 INFO [main] r.y.b.BanksampleApplication [StartupInfoLogger.java:56] Started BanksampleApplication in 12.512 seconds (process running for 18.718)
+2024-05-21 12:22:20,806 INFO [http-nio-8080-exec-7] r.y.b.C.UserController [UserController.java:80] Попытка входа в систему под логином: user9
+2024-05-21 12:22:21,016 INFO [http-nio-8080-exec-7] r.y.b.C.UserController [UserController.java:85] Успешная попытка входа
+2024-05-21 12:26:50,511 INFO [main] r.y.b.C.UserController [UserController.java:184] Попытка перевода денежных средств User: null
+2024-05-21 12:26:50,561 INFO [main] r.y.b.C.UserController [UserController.java:196] Неудачная попытка перевода средств
+2024-05-21 12:28:07,888 INFO [main] r.y.b.C.UserController [UserController.java:184] Попытка перевода денежных средств User: null
+2024-05-21 12:28:07,908 INFO [main] r.y.b.C.UserController [UserController.java:196] Неудачная попытка перевода средств
+2024-05-21 12:28:49,140 INFO [main] r.y.b.C.UserController [UserController.java:184] Попытка перевода денежных средств User: user7
+2024-05-21 12:28:49,160 INFO [main] r.y.b.C.UserController [UserController.java:196] Неудачная попытка перевода средств
+2024-05-21 12:36:56,147 INFO [main] r.y.b.C.UserController [UserController.java:184] Попытка перевода денежных средств User: user7
+2024-05-21 12:36:56,175 INFO [main] r.y.b.C.UserController [UserController.java:196] Неудачная попытка перевода средств
+2024-05-21 12:39:25,523 INFO [main] r.y.b.C.UserController [UserController.java:184] Попытка перевода денежных средств User: user7
+2024-05-21 12:39:25,541 INFO [main] r.y.b.C.UserController er.java:86] Успешная попытка входа
+[UserController.java:196] Неудачная попытка перевода средств
+2024-05-21 12:40:34,124 INFO [main] r.y.b.C.UserController [UserController.java:184] Попытка перевода денежных средств User: user7
+2024-05-21 12:40:34,146 INFO [main] r.y.b.C.UserController [UserController.java:196] Неудачная попытка перевода средств
+2024-05-21 12:46:02,176 INFO [main] r.y.b.C.UserController [UserController.java:184] Попытка перевода денежных средств User: user7
+2024-05-21 12:46:02,192 INFO [main] r.y.b.C.UserController [UserController.java:196] Неудачная попытка перевода средств
+2024-05-21 12:46:30,378 INFO [main] r.y.b.C.UserController [UserController.java:184] Попытка перевода денежных средств User: user7
+2024-05-21 12:46:30,410 INFO [main] r.y.b.C.UserController [UserController.java:196] Неудачная попытка перевода средств
+2024-05-21 12:46:56,453 INFO [main] r.y.b.C.UserController [UserController.java:184] Попытка перевода денежных средств User: user7
+2024-05-21 12:46:56,473 INFO [main] r.y.b.C.UserController [UserController.java:196] Неудачная попытка перевода средств
+2024-05-21 12:52:53,980 INFO [main] r.y.b.C.UserController [UserController.java:184] Попытка перевода денежных средств User: user7
+2024-05-21 12:52:53,999 INFO [main] r.y.b.C.UserController [UserController.java:196] Неудачная попытка перевода средств
+2024-05-21 12:53:49,459 INFO [main] r.y.b.C.UserController [UserController.java:184] Попытка перевода денежных средств User: user7
+2024-05-21 12:53:49,462 INFO [main] r.y.b.C.UserController [UserController.java:196] Неудачная попытка перевода средств
+2024-05-21 12:54:19,492 INFO [main] r.y.b.C.UserController [UserController.java:184] Попытка перевода денежных средств User: user7
+2024-05-21 12:54:19,492 INFO [main] r.y.b.C.UserController [UserController.java:196] Неудачная попытка перевода средств
+2024-05-21 13:02:50,925 INFO [main] r.y.b.UserControllerTest [StartupInfoLogger.java:50] Starting UserControllerTest using Java 18.0.2.1 with PID 9528 (started by 1 in F:\JavaSpring_myPrj\banksample)
+2024-05-21 13:02:50,932 INFO [main] r.y.b.UserControllerTest [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
+2024-05-21 13:02:52,113 ERROR [main] o.s.b.d.LoggingFailureAnalysisReporter [LoggingFailureAnalysisReporter.java:40]
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in ru.yarm.banksample.Controllers.UserController required a bean of type 'ru.yarm.banksample.Services.UserService' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'ru.yarm.banksample.Services.UserService' in your configuration.
+
+2024-05-21 13:11:11,298 INFO [main] r.y.b.UserControllerTest [StartupInfoLogger.java:50] Starting UserControllerTest using Java 18.0.2.1 with PID 5164 (started by 1 in F:\JavaSpring_myPrj\banksample)
+2024-05-21 13:11:11,305 INFO [main] r.y.b.UserControllerTest [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
+2024-05-21 13:11:12,331 ERROR [main] o.s.b.d.LoggingFailureAnalysisReporter [LoggingFailureAnalysisReporter.java:40]
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in ru.yarm.banksample.Controllers.UserController required a bean of type 'ru.yarm.banksample.Services.UserService' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'ru.yarm.banksample.Services.UserService' in your configuration.
+
+2024-05-21 13:13:47,887 INFO [main] r.y.b.BanksampleApplication [StartupInfoLogger.java:50] Starting BanksampleApplication using Java 18.0.2.1 with PID 8928 (F:\JavaSpring_myPrj\banksample\target\classes started by 1 in F:\JavaSpring_myPrj\banksample)
+2024-05-21 13:13:47,893 INFO [main] r.y.b.BanksampleApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
+2024-05-21 13:13:53,567 INFO [main] r.y.b.BanksampleApplication [StartupInfoLogger.java:56] Started BanksampleApplication in 5.975 seconds (process running for 9.07)
+2024-05-21 13:15:55,144 INFO [http-nio-8080-exec-1] r.y.b.C.UserController [UserController.java:80] Попытка входа в систему под логином: user9
+2024-05-21 13:15:55,273 INFO [http-nio-8080-exec-1] r.y.b.C.UserController [UserController.java:85] Успешная попытка входа
+2024-05-21 13:16:06,430 INFO [http-nio-8080-exec-3] r.y.b.C.UserController [UserController.java:80] Попытка входа в систему под логином: user9
+2024-05-21 13:16:06,434 INFO [http-nio-8080-exec-3] r.y.b.C.UserController [UserController.java:85] Успешная попытка входа
+2024-05-21 13:19:20,903 INFO [main] r.y.b.BanksampleApplication [StartupInfoLogger.java:50] Starting BanksampleApplication using Java 18.0.2.1 with PID 1408 (F:\JavaSpring_myPrj\banksample\target\classes started by 1 in F:\JavaSpring_myPrj\banksample)
+2024-05-21 13:19:20,905 INFO [main] r.y.b.BanksampleApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
+2024-05-21 13:19:24,726 INFO [main] r.y.b.BanksampleApplication [StartupInfoLogger.java:56] Started BanksampleApplication in 4.107 seconds (process running for 4.858)
+2024-05-21 13:23:07,560 INFO [main] r.y.b.C.UserController [UserController.java:184] Попытка перевода денежных средств User: user7
+2024-05-21 13:23:07,589 INFO [main] r.y.b.C.UserController [UserController.java:196] Неудачная попытка перевода средств
+2024-05-21 13:23:49,868 INFO [main] r.y.b.C.UserController [UserController.java:184] Попытка перевода денежных средств User: user7
+2024-05-21 13:23:49,889 INFO [main] r.y.b.C.UserController [UserController.java:196] Неудачная попытка перевода средств
+2024-05-21 13:24:11,084 INFO [main] r.y.b.BanksampleApplication [StartupInfoLogger.java:50] Starting BanksampleApplication using Java 18.0.2.1 with PID 12076 (F:\JavaSpring_myPrj\banksample\target\classes started by 1 in F:\JavaSpring_myPrj\banksample)
+2024-05-21 13:24:11,084 INFO [main] r.y.b.BanksampleApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
+2024-05-21 13:24:14,928 INFO [main] r.y.b.BanksampleApplication [StartupInfoLogger.java:56] Started BanksampleApplication in 4.129 seconds (process running for 4.869)
+2024-05-21 13:24:51,090 INFO [http-nio-8080-exec-9] r.y.b.C.UserController [UserController.java:184] Попытка перевода денежных средств User: user11
+2024-05-21 13:24:51,221 INFO [http-nio-8080-exec-9] r.y.b.C.UserController [UserController.java:192] Сумма: 30 от User:user9 к User:user11 переведена
+2024-05-21 13:24:51,221 INFO [http-nio-8080-exec-9] r.y.b.C.UserController [UserController.java:199] Транзакция завершена.
+2024-05-21 13:25:03,350 INFO [http-nio-8080-exec-1] r.y.b.C.UserController [UserController.java:184] Попытка перевода денежных средств User: user11
+2024-05-21 13:25:03,364 INFO [http-nio-8080-exec-1] r.y.b.C.UserController [UserController.java:192] Сумма: 30 от User:user9 к User:user11 переведена
+2024-05-21 13:25:03,364 INFO [http-nio-8080-exec-1] r.y.b.C.UserController [UserController.java:199] Транзакция завершена.
+2024-05-21 13:25:09,661 INFO [http-nio-8080-exec-4] r.y.b.C.UserController [UserController.java:184] Попытка перевода денежных средств User: user11
+2024-05-21 13:25:09,675 INFO [http-nio-8080-exec-4] r.y.b.C.UserController [UserController.java:192] Сумма: 30 от User:user9 к User:user11 переведена
+2024-05-21 13:25:09,676 INFO [http-nio-8080-exec-4] r.y.b.C.UserController [UserController.java:199] Транзакция завершена.
+2024-05-21 13:26:31,920 INFO [main] r.y.b.C.UserController [UserController.java:184] Попытка перевода денежных средств User: user7
+2024-05-21 13:26:31,920 INFO [main] r.y.b.C.UserController [UserController.java:196] Неудачная попытка перевода средств
+2024-05-21 13:30:16,793 INFO [main] r.y.b.C.UserController [UserController.java:184] Попытка перевода денежных средств User: user7
+2024-05-21 13:30:16,796 INFO [main] r.y.b.C.UserController [UserController.java:196] Неудачная попытка перевода средств
+2024-05-21 13:30:46,104 INFO [main] r.y.b.C.UserController [UserController.java:184] Попытка перевода денежных средств User: user7
+2024-05-21 13:30:46,104 INFO [main] r.y.b.C.UserController [UserController.java:196] Неудачная попытка перевода средств
+2024-05-21 13:43:24,419 INFO [main] r.y.b.C.UserController [UserController.java:80] Попытка входа в систему под логином: user9
+2024-05-21 13:43:24,464 INFO [main] r.y.b.C.UserController [UserController.java:85] Успешная попытка входа
+2024-05-21 13:43:53,711 INFO [main] r.y.b.C.UserController [UserController.java:80] Попытка входа в систему под логином: user9
+2024-05-21 13:43:53,736 INFO [main] r.y.b.C.UserController [UserController.java:85] Успешная попытка входа
+2024-05-21 13:46:19,889 INFO [main] r.y.b.C.UserController [UserController.java:80] Попытка входа в систему под логином: user9
+2024-05-21 13:46:19,905 INFO [main] r.y.b.C.UserController [UserController.java:86] Успешная попытка входа
+2024-05-21 13:48:59,640 INFO [main] r.y.b.C.UserController [UserController.java:80] Попытка входа в систему под логином: user9
+2024-05-21 13:48:59,658 INFO [main] r.y.b.C.UserController [UserController.java:86] Успешная попытка входа
+2024-05-21 13:50:13,609 INFO [main] r.y.b.C.UserController [UserController.java:80] Попытка входа в систему под логином: user9
+2024-05-21 13:50:13,625 INFO [main] r.y.b.C.UserController [UserController.java:86] Успешная попытка входа
+2024-05-21 13:52:25,280 INFO [main] r.y.b.BanksampleApplication [StartupInfoLogger.java:50] Starting BanksampleApplication using Java 18.0.2.1 with PID 4172 (F:\JavaSpring_myPrj\banksample\target\classes started by 1 in F:\JavaSpring_myPrj\banksample)
+2024-05-21 13:52:25,282 INFO [main] r.y.b.BanksampleApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
+2024-05-21 13:52:30,561 INFO [main] r.y.b.BanksampleApplication [StartupInfoLogger.java:56] Started BanksampleApplication in 5.672 seconds (process running for 6.588)
+2024-05-21 13:52:41,822 INFO [http-nio-8080-exec-1] r.y.b.C.UserController [UserController.java:80] Попытка входа в систему под логином: string
+2024-05-21 13:52:41,986 INFO [http-nio-8080-exec-1] r.y.b.C.UserController [UserController.java:86] Успешная попытка входа
+2024-05-21 13:52:45,572 INFO [http-nio-8080-exec-3] r.y.b.C.UserController [UserController.java:80] Попытка входа в систему под логином: string
+2024-05-21 13:52:45,576 INFO [http-nio-8080-exec-3] r.y.b.C.UserController [UserController.java:86] Успешная попытка входа
+2024-05-21 13:52:46,114 INFO [http-nio-8080-exec-2] r.y.b.C.UserController [UserController.java:80] Попытка входа в систему под логином: string
+2024-05-21 13:52:46,118 INFO [http-nio-8080-exec-2] r.y.b.C.UserController [UserController.java:86] Успешная попытка входа
+2024-05-21 13:53:19,959 INFO [http-nio-8080-exec-5] r.y.b.C.UserController [UserController.java:80] Попытка входа в систему под логином: string
+2024-05-21 13:53:19,965 INFO [http-nio-8080-exec-5] r.y.b.C.UserController [UserController.java:89] Неуспешная попытка входа
+2024-05-21 13:53:25,654 INFO [http-nio-8080-exec-6] r.y.b.C.UserController [UserController.java:80] Попытка входа в систему под логином: string
+2024-05-21 13:53:25,659 INFO [http-nio-8080-exec-6] r.y.b.C.UserController [UserController.java:89] Неуспешная попытка входа
