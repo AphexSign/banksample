@@ -1,48 +1,115 @@
 package ru.yarm.banksample.Controllers;
 
+
+import io.jsonwebtoken.JwtException;
+import io.micrometer.common.util.StringUtils;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import ru.yarm.banksample.Dto.BankResponse;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import ru.yarm.banksample.Models.User;
+import ru.yarm.banksample.Services.JwtService;
 import ru.yarm.banksample.Services.UserSearchService;
 
+import java.time.LocalDate;
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/search")
 public class UserSearchController {
 
     private final UserSearchService userSearchService;
+    private final JwtService jwtService;
 
-    public UserSearchController(UserSearchService userSearchService) {
+    public UserSearchController(UserSearchService userSearchService, JwtService jwtService) {
         this.userSearchService = userSearchService;
+        this.jwtService = jwtService;
     }
 
-    @GetMapping
-    private BankResponse<List<User>> getUsers() {
-        List<User> allUsers = userSearchService.findAllUsers();
-        return new BankResponse<>(allUsers.size(), allUsers);
+    @GetMapping("/byFio")
+    @Operation(summary = "search by FIO", security = @SecurityRequirement(name = "bearerAuth"))
+    public ResponseEntity<String> searchFio(@RequestHeader(value = "Authorization", required = false) String token,
+                                            @RequestParam String fio,
+                                            @RequestParam(required = false, defaultValue = "id") String field,
+                                            @RequestParam(required = false, defaultValue = "0") int offset,
+                                            @RequestParam(required = false, defaultValue = "5") int pagesize) {
+
+        List<String> users;
+        try {
+            if (StringUtils.isBlank(token)) throw new JwtException("Token is empty");
+            token = token.substring(7);
+            if (jwtService.isTokenValid(token)) {
+                Page<User> result = userSearchService.findUserByFioLikePagSort(fio, offset, pagesize, field);
+                users = result.getContent().stream().map(User::toString).toList();
+            } else throw new JwtException("Wrong JWT-token credentials");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+        return ResponseEntity.ok(users.toString());
     }
 
-    @GetMapping("/{field}")
-    private BankResponse<List<User>> getUsersWithSort(@PathVariable String field) {
-        List<User> allUsers = userSearchService.findUsersWithSorting(field);
-        return new BankResponse<>(allUsers.size(), allUsers);
+
+    @GetMapping("/byDate")
+    @Operation(summary = "search by Date", security = @SecurityRequirement(name = "bearerAuth"))
+    public ResponseEntity<String> searchDate(@RequestHeader(value = "Authorization", required = false) String token,
+                                             @RequestParam LocalDate date,
+                                             @RequestParam(required = false, defaultValue = "id") String field,
+                                             @RequestParam(required = false, defaultValue = "0") int offset,
+                                             @RequestParam(required = false, defaultValue = "5") int pagesize) {
+
+        List<String> users;
+        try {
+            if (StringUtils.isBlank(token)) throw new JwtException("Token is empty");
+            token = token.substring(7);
+            if (jwtService.isTokenValid(token)) {
+                Page<User> result = userSearchService.findUserByDatePagSort(date, offset, pagesize, field);
+                users = result.getContent().stream().map(User::toString).toList();
+            } else throw new JwtException("Wrong JWT-token credentials");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+        return ResponseEntity.ok(users.toString());
     }
 
-    @GetMapping("/pagination/{offset}/{pageSize}")
-    private BankResponse<Page<User>> getUsersWithPagination(@PathVariable int offset, @PathVariable int pageSize) {
-        Page<User> usersWithPagination = userSearchService.findUsersWithPagination(offset, pageSize);
-        return new BankResponse<>(usersWithPagination.getSize(), usersWithPagination);
+
+    @GetMapping("/byPhone")
+    @Operation(summary = "search by telephone", security = @SecurityRequirement(name = "bearerAuth"))
+    public ResponseEntity<String> searchPhone(@RequestHeader(value = "Authorization", required = false) String token,
+                                              @RequestParam String telephone) {
+        User user;
+        try {
+            if (StringUtils.isBlank(token)) throw new JwtException("Token is empty");
+            token = token.substring(7);
+            if (jwtService.isTokenValid(token)) {
+
+                user = userSearchService.findUserByTelephone(telephone);
+            } else throw new JwtException("Wrong JWT-token credentials");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+        return ResponseEntity.ok(user.toString());
     }
 
-    @GetMapping("/paginationAndSort/{offset}/{pageSize}/{field}")
-    private BankResponse<Page<User>> getProductsWithPaginationAndSort(@PathVariable int offset, @PathVariable int pageSize,@PathVariable String field) {
-        Page<User> usersWithPagination = userSearchService.findUsersWithPaginationAndSorting(offset, pageSize, field);
-        return new BankResponse<>(usersWithPagination.getSize(), usersWithPagination);
+
+    @GetMapping("/byEmail")
+    @Operation(summary = "search by email", security = @SecurityRequirement(name = "bearerAuth"))
+    public ResponseEntity<String> searchEmail(@RequestHeader(value = "Authorization", required = false) String token,
+                                              @RequestParam String email) {
+        User user;
+        try {
+            if (StringUtils.isBlank(token)) throw new JwtException("Token is empty");
+            token = token.substring(7);
+            if (jwtService.isTokenValid(token)) {
+                user = userSearchService.findUserByEmail(email);
+            } else throw new JwtException("Wrong JWT-token credentials");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+        return ResponseEntity.ok(user.toString());
     }
 
 

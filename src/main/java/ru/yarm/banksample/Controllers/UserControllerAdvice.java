@@ -64,4 +64,13 @@ public class UserControllerAdvice {
 
 
     }
+
+
+    @ExceptionHandler(ValueIsNegativeException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<String> handleValueIsNegativeException(ValueIsNegativeException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+
+
+    }
 }

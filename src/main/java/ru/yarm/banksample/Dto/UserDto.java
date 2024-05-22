@@ -22,6 +22,6 @@ public class UserDto {
     private String telephone;
     private String email;
     private BigDecimal balance;
-    private LocalDate date_birth;
+    private LocalDate birth;
 
 }

@@ -21,8 +21,8 @@ public class UserService {
     }
 
     @Transactional
-    public User saveUser(User user) {
-        return userRepository.save(user);
+    public void saveUser(User user) {
+        userRepository.save(user);
     }
 
     public User loadUserByLogin(String login) throws UsernameNotFoundException {
@@ -61,7 +61,7 @@ public class UserService {
     }
 
     public boolean isValidCredential(User userChecked) {
-        boolean result = false;
+        boolean result ;
         User userReal = loadUserByLogin(userChecked.getLogin());
         if (userReal != null) {
             if (userReal.getPassword().equals(userChecked.getPassword())) {
@@ -72,8 +72,6 @@ public class UserService {
         return result;
     }
 
-    // Обновляем почту, если это не лишит нас всех контактов от User
-    // ВНЕСТИ ПРОВЕРКУ НА ТАКОЙ ЖЕ email
     @Transactional
     public void updateEmail(User user, String newEmail) {
         User sameUser;
@@ -83,12 +81,9 @@ public class UserService {
         } catch (UsernameNotFoundException e) {
             sameUser = null;
         }
-
         if (sameUser != null) throw new UserDataAlreadyPresentException("Email already present in DB");
-
-
         // Если нет двойников, и такой юзер существует
-        if (user != null && sameUser == null) {
+        if (user != null) {
             if (!StringUtils.isBlank(newEmail)) {
                 user.setEmail(newEmail);
                 userRepository.save(user);
@@ -101,10 +96,7 @@ public class UserService {
                 } else throw new ZeroContactInfoException("Can't delete all contacts from user");
             }
         } else throw new UsernameNotFoundException("");
-
-
     }
-
 
     @Transactional
     public void updateTelephone(User user, String newTelephone) {
@@ -118,7 +110,7 @@ public class UserService {
 
         if (sameUser != null) throw new UserDataAlreadyPresentException("Telephone already present in DB");
 
-        if (user != null && sameUser == null) {
+        if (user != null) {
             if (!StringUtils.isBlank(newTelephone)) {
                 user.setTelephone(newTelephone);
                 userRepository.save(user);
@@ -161,7 +153,6 @@ public class UserService {
     public boolean isDetelableEmail(User user) {
         return !StringUtils.isBlank(user.getTelephone());
     }
-
 
     public boolean isDetelableTelephone(User user) {
         return !StringUtils.isBlank(user.getEmail());

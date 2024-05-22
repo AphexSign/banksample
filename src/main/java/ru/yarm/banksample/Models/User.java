@@ -1,8 +1,8 @@
 package ru.yarm.banksample.Models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,13 +23,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "Login can't me empty")
-    @Size(min = 3, max = 100, message = "Login can't be less 3 symbols")
     @Column(name = "login")
     private String login;
 
-    @NotEmpty(message = "Password can't me empty")
-    @Size(min = 3, max = 100, message = "Password can't be less 3 symbols")
     @Column(name = "password")
     private String password;
 
@@ -42,12 +38,14 @@ public class User {
     @Column(name = "email")
     private String email;
 
+    @PositiveOrZero
     @Column(name = "balance")
     private BigDecimal balance;
 
     @Column(name = "first_deposit")
     private BigDecimal first_deposit;
 
-    @Column(name="date_birth")
-    private LocalDate date_birth;
+    @NotNull
+    @Column(name = "birth")
+    private LocalDate birth;
 }

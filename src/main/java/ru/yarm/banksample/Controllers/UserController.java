@@ -1,6 +1,7 @@
 package ru.yarm.banksample.Controllers;
 
 import io.jsonwebtoken.JwtException;
+import io.micrometer.common.util.StringUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.slf4j.Logger;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.yarm.banksample.Dto.CredentialDto;
 import ru.yarm.banksample.Dto.UserDto;
 import ru.yarm.banksample.Exceptions.UserAlreadyExistsException;
+import ru.yarm.banksample.Exceptions.ValueIsNegativeException;
 import ru.yarm.banksample.Models.User;
 import ru.yarm.banksample.Dto.TransferDto;
 import ru.yarm.banksample.Services.JwtService;
@@ -50,7 +52,7 @@ public class UserController {
                 .email(userDto.getEmail())
                 .balance(userDto.getBalance())
                 .first_deposit(userDto.getBalance())
-                .date_birth(userDto.getDate_birth())
+                .birth(userDto.getBirth())
                 .build();
         logger.info("Попытка регистрации нового аккаунта: "+user.getLogin());
         try {
@@ -81,37 +83,16 @@ public class UserController {
         try {
             if (userService.isValidCredential(user)) {
                 jwt = jwtService.generateToken(user);
-                System.err.println("all valid");
             }
             logger.info("Успешная попытка входа");
-            return ResponseEntity.ok("JWT: " + jwt);
+            return ResponseEntity.ok("Bearer " + jwt);
         } catch (Exception e) {
             logger.info("Неуспешная попытка входа");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 
-    @PutMapping("/change/email")
-    @Operation(summary = "Change email", security = @SecurityRequirement(name = "bearerAuth"))
-    public ResponseEntity<String> updateEmail(@RequestHeader(value = "Authorization", required = false) String token,
-                                              @RequestParam String email) {
 
-        logger.info("Попытка изменения email");
-        try {
-
-            token = token.substring(7);
-            if (jwtService.isTokenValid(token)) {
-                User user = userService.loadUserByLogin(jwtService.extractLogin(token));
-                userService.updateEmail(user, email);
-            } else throw new JwtException("Wrong JWT-token credentials");
-
-        } catch (Exception e) {
-            logger.info("Неудачная попытка изменения email");
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-        }
-        logger.info("Успешная попытка изменения email");
-        return ResponseEntity.ok("Email updated successfully");
-    }
 
 
     @PutMapping("/change/phone")
@@ -120,6 +101,7 @@ public class UserController {
                                                   @RequestParam String telephone) {
         logger.info("Попытка изменения telephone");
         try {
+            if (StringUtils.isBlank(token)) throw new JwtException("Token is empty");
             token = token.substring(7);
             if (jwtService.isTokenValid(token)) {
                 User user = userService.loadUserByLogin(jwtService.extractLogin(token));
@@ -134,12 +116,37 @@ public class UserController {
     }
 
 
+    @PutMapping("/change/email")
+    @Operation(summary = "Change email", security = @SecurityRequirement(name = "bearerAuth"))
+    public ResponseEntity<String> updateEmail(@RequestHeader(value = "Authorization", required = false) String token,
+                                                  @RequestParam String email) {
+        logger.info("Попытка изменения email");
+        try {
+            if (StringUtils.isBlank(token)) throw new JwtException("Token is empty");
+            token = token.substring(7);
+            if (jwtService.isTokenValid(token)) {
+                User user = userService.loadUserByLogin(jwtService.extractLogin(token));
+                userService.updateEmail(user, email);
+            } else throw new JwtException("Wrong JWT-token credentials");
+        } catch (Exception e) {
+            logger.info("Неудачная попытка изменения email");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+        logger.info("Успешная попытка изменения email");
+        return ResponseEntity.ok("Email updated successfully");
+    }
+
+
+
+
+
     @DeleteMapping("/email")
     @Operation(summary = "Delete email", security = @SecurityRequirement(name = "bearerAuth"))
     public ResponseEntity<String> deleteEmail(@RequestHeader(value = "Authorization", required = false) String token) {
 
 
         try {
+            if (StringUtils.isBlank(token)) throw new JwtException("Token is empty");
             token = token.substring(7);
             if (jwtService.isTokenValid(token)) {
                 User user = userService.loadUserByLogin(jwtService.extractLogin(token));
@@ -161,7 +168,7 @@ public class UserController {
     public ResponseEntity<String> deleteTelephone(@RequestHeader(value = "Authorization", required = false) String token) {
 
         try {
-
+            if (StringUtils.isBlank(token)) throw new JwtException("Token is empty");
             token = token.substring(7);
             if (jwtService.isTokenValid(token)) {
                 User user = userService.loadUserByLogin(jwtService.extractLogin(token));
@@ -184,10 +191,12 @@ public class UserController {
                                                 @RequestBody TransferDto transferDto) {
         logger.info("Попытка перевода денежных средств User: "+transferDto.getUsername());
         try {
+            if (StringUtils.isBlank(token)) throw new JwtException("Token is empty");
             token = token.substring(7);
             if (jwtService.isTokenValid(token)) {
                 String recepient = transferDto.getUsername();
                 BigDecimal amount = new BigDecimal(transferDto.getAmount());
+                if (amount.compareTo(BigDecimal.ZERO) < 0) throw new ValueIsNegativeException("Недопустимое значение");
                 User payer = userService.loadUserByLogin(jwtService.extractLogin(token));
                 userService.tryTransfer(payer, recepient, amount);
                 logger.info("Сумма: "+amount+" от User:"+payer.getLogin()+" к User:"+recepient+" переведена");
